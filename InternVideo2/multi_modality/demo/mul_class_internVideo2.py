@@ -196,8 +196,8 @@ class InternVideo2VideoClassifier:
                 video_feats = torch.stack(data['feats'])
                 video_paths_list.append({'feat': torch.mean(video_feats, dim=0), 'path': video_path})
 
-        label_probs = (100.0 * torch.stack([v['feat'] for v in video_paths_list]) @ text_feats.view(-1, text_feats.size(0))).softmax(dim=-1)
-        # label_probs = (100.0 * video_feats @ text_feats.T).softmax(dim=-1)
+        # label_probs = (100.0 * torch.stack([v['feat'] for v in video_paths_list]) @ text_feats.view(-1, text_feats.size(0))).softmax(dim=-1)
+        label_probs = (100.0 * video_feats @ text_feats.T).softmax(dim=-1)
         top_probs, top_labels = label_probs.cpu().topk(1, dim=-1)
         top_labels = top_labels.squeeze()
 
