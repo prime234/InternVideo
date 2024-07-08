@@ -1,6 +1,6 @@
 import cv2
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 import glob
 import shutil
 import torch
@@ -20,10 +20,10 @@ class InternVideo2VideoClassifier:
         self.config, self.intern_model, self.tokenizer = self.setup_internvideo2(config_path, intern_video2_path, bert_large_uncased_path)
         self.intern_model = self.intern_model.to('cuda')
 
-        self.video_input_dir = os.path.join(base_path, 'videos', '20240430')
+        self.video_input_dir = os.path.join(base_path, 'videos')
         self.feats_save_dir = os.path.join(base_path, 'feats_test')
-        self.center_dir = os.path.join(base_path, '2_level_center')
-        self.output_dir = os.path.join(base_path, '2_level_test_v2v_update')
+        self.center_dir = os.path.join(base_path, 'level_center')
+        self.output_dir = os.path.join(base_path, 'level_test_v2v')
 
         os.makedirs(self.feats_save_dir, exist_ok=True)
         os.makedirs(self.center_dir, exist_ok=True)
@@ -156,26 +156,16 @@ class InternVideo2VideoClassifier:
 if __name__ == '__main__':
     base_path = "/data/30062036/projects/InternVideo2/data"
     class_dirs_cn = [
-        '人类活动场景',
-        '动物活动场景',
-        '植物',
-        '常见事物',
-        '环境和自然现象',
-        '超现实场景'
+      
     ]
 
     class_dirs_en = [
-        'Human Activity Scenes',
-        'Animal Activity Scenes',
-        'Plants',
-        'Common Items',
-        'Environment and Natural Phenomena',
-        'Surreal Scenes'
+
     ]
 
     config_path = "demo/internvideo2_stage2_config.py"
-    intern_video2_path = "/data/30062036/projects/InternVideo2/checkpoints/InternVideo2-stage2_1b-224p-f4.pt"
-    bert_large_uncased_path = "/data/30062036/projects/InternVideo2/checkpoints/bert-large-uncased"
+    intern_video2_path = "/projects/InternVideo2/checkpoints/InternVideo2-stage2_1b-224p-f4.pt"
+    bert_large_uncased_path = "/projects/InternVideo2/checkpoints/bert-large-uncased"
 
     classifier = InternVideo2VideoClassifier(base_path, class_dirs_cn, class_dirs_en, config_path, intern_video2_path, bert_large_uncased_path)
     text_feats = classifier.generate_text_features()
