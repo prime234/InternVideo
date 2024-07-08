@@ -131,33 +131,11 @@ class ViCLIP_VideoClassifier:
 
 
 if __name__ == '__main__':
-    base_path = "/data/30062036/projects/data/"
+    base_path = "/projects/data/"
     class_dirs_cn = [
-        '打扫', '洗漱', '穿戴', '美妆', '烹饪', '饮食', '亲子', '宠物', '休息', '购物',
-        '社交', '游览', '棋牌', '护理', '摄影', '户外', '日常锻炼', '竞技比赛', '极限运动',
-        '唱歌', '跳舞', '演奏', '戏剧', '魔术', '绘画', '雕刻', '文职工作', '维修制作',
-        '建筑施工', '工业生产', '农业种植', '驾驶控制', '军事活动', '传统习俗', '仪式', '庆祝'
     ]
 
     class_dirs_en = [
-        'Human Activity Scenes Cleaning', 'Human Activity Scenes Grooming', 'Human Activity Scenes Dressing',
-        'Human Activity Scenes Makeup Application', 'Human Activity Scenes Cooking', 'Human Activity Scenes Eating',
-        'Human Activity Scenes Parent-Child Activities', 'Human Activity Scenes Pet Care',
-        'Human Activity Scenes Resting',
-        'Human Activity Scenes Shopping', 'Human Activity Scenes Socializing', 'Human Activity Scenes Sightseeing',
-        'Human Activity Scenes Card and Board Games', 'Human Activity Scenes Caretaking',
-        'Human Activity Scenes Photography',
-        'Human Activity Scenes Outdoor Activities', 'Human Activity Scenes Routine Exercise',
-        'Human Activity Scenes Competitive Sports',
-        'Human Activity Scenes Extreme Sports', 'Human Activity Scenes Singing', 'Human Activity Scenes Dancing',
-        'Human Activity Scenes Playing Instruments', 'Human Activity Scenes Drama', 'Human Activity Scenes Magic',
-        'Human Activity Scenes Painting', 'Human Activity Scenes Sculpting', 'Human Activity Scenes Clerical Work',
-        'Human Activity Scenes Repair and Crafting', 'Human Activity Scenes Construction',
-        'Human Activity Scenes Industrial Production',
-        'Human Activity Scenes Agricultural Cultivation', 'Human Activity Scenes Vehicle Operation',
-        'Human Activity Scenes Military Activities',
-        'Human Activity Scenes Traditional Customs', 'Human Activity Scenes Ceremonies',
-        'Human Activity Scenes Celebrations'
     ]
 
     classifier = ViCLIP_VideoClassifier(base_path, class_dirs_cn, class_dirs_en)
