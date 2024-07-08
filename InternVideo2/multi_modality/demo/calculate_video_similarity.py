@@ -20,6 +20,5 @@ def calculate_video_similarity(video_path, classifier):
     for i, class_cn in enumerate(classifier.class_dirs_cn):
         print(f"Similarity with class '{class_cn}': {top_probs[i]:.2f}")
 
-# 用法示例
 video_path = "path_to_video.mp4"
 calculate_video_similarity(video_path, classifier)
