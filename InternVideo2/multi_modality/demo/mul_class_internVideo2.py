@@ -21,10 +21,10 @@ class InternVideo2VideoClassifier:
                                                                                  bert_large_uncased_path)
         self.intern_model = self.intern_model.to('cuda')
 
-        self.video_input_dir = os.path.join(base_path, 'videos', '20240430')
+        self.video_input_dir = os.path.join(base_path, 'videos')
         self.feats_save_dir = os.path.join(base_path, 'feats_test')
-        self.center_dir = os.path.join(base_path, '2_level_center')
-        self.output_dir = os.path.join(base_path, '2_level_test_v2v_update')
+        self.center_dir = os.path.join(base_path, 'level_center')
+        self.output_dir = os.path.join(base_path, 'level_v2v')
 
         os.makedirs(self.feats_save_dir, exist_ok=True)
         os.makedirs(self.center_dir, exist_ok=True)
@@ -39,8 +39,8 @@ class InternVideo2VideoClassifier:
     #                                                                              bert_large_uncased_path)
     #     self.intern_model = self.intern_model.to('cuda')
     #
-    #     self.center_dir = os.path.join(base_path, '2_level_center')
-    #     self.output_dir = os.path.join(base_path, '2_level_test_v2v_update')
+    #     self.center_dir = os.path.join(base_path)
+    #     self.output_dir = os.path.join(base_path)
     #
     #     os.makedirs(self.center_dir, exist_ok=True)
     #     os.makedirs(self.output_dir, exist_ok=True)
@@ -231,16 +231,15 @@ class InternVideo2VideoClassifier:
 if __name__ == '__main__':
     base_path = "/data/30062036/projects/InternVideo2/data"
     class_dirs_cn = [
-        '人类活动场景',
-        '动物活动场景',
-        '植物',
-        '常见事物',
-        '环境和自然现象',
-        '超现实场景'
+        '娱乐',
+        '教育',
+        '新闻',
+        '体育',
+        '旅游'
     ]
 
     class_dirs_en = [
-        'Human Activity Scenes',
+        '',
         'Animal Activity Scenes',
         'Plants',
         'Common Items',
@@ -248,13 +247,13 @@ if __name__ == '__main__':
         'Surreal Scenes'
     ]
     config_path = "demo/internvideo2_stage2_config.py"
-    intern_video2_path = "/data/30062036/projects/InternVideo2/checkpoints/InternVideo2-stage2_1b-224p-f4.pt"
-    bert_large_uncased_path = "/data/30062036/projects/InternVideo2/checkpoints/bert-large-uncased"
+    intern_video2_path = "/InternVideo2/checkpoints/InternVideo2-stage2_1b-224p-f4.pt"
+    bert_large_uncased_path = "/InternVideo2/checkpoints/bert-large-uncased"
 
     classifier = InternVideo2VideoClassifier(base_path, class_dirs_cn, class_dirs_en, config_path, intern_video2_path,
                                              bert_large_uncased_path)
 
-    video_input_dir = os.path.join(base_path, 'videos', '20240430')
+    video_input_dir = os.path.join(base_path, 'videos')
     feats_save_dir = os.path.join(base_path, 'feats_test')
     classifier.extract_video_features_and_save(video_input_dir, feats_save_dir)
 
@@ -281,7 +280,7 @@ def calculate_similarity_for_video(video_path, text_feats, intern_model):
     print(f"相似度结果 for {video_path}: {similarity}")
 
 
-video_path = 'path/to/video.mp4'
+video_path = 'videos/video.mp4'
 calculate_similarity_for_video(video_path, text_feats, classifier.intern_model)
 
 
